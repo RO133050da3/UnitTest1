@@ -16,16 +16,26 @@ namespace UnitTestProject1
         [TestInitialize]
         public void BeginTest()
         {
-            _p = new Person();
-            _p.Name = "Magne";
-            _p.Age = 4;
+            _p = new Person("Magne");
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestAdult()
         {
+            // Under 18 should return false
+            _p.Age = 17.99;
             bool result = _p.isAdult();
             Assert.IsFalse(result);
+
+            // Equal to 18 should return true
+            _p.Age = 18.00;
+            result = _p.isAdult();
+            Assert.IsTrue(result);
+
+            // Over 18 should return true
+            _p.Age = 18.01;
+            result = _p.isAdult();
+            Assert.IsTrue(result);
         }
     }
 }
