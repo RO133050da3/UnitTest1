@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    public class Person
+    public class Person 
     {
         private string _name;
-        private double _age;
+        private decimal _age;
+
         public string Name
         {
             get { return _name; }
@@ -21,15 +22,16 @@ namespace ClassLibrary1
             }
         }
 
-        public double Age
+        public decimal Age
         {
             get { return _age; }
             set { _age = value; }
         }
 
+
         public Person()
         {}
-
+        
         public Person(string name)
         {
             this.Name = name;
@@ -39,5 +41,6 @@ namespace ClassLibrary1
         {
             return _age >= 18;
         }
+
     } 
 }
