@@ -25,7 +25,7 @@ namespace UnitTestProject1
         public void TestMethod1()
         {
             bool result = _p.isAdult();
-            Assert.IsTrue(result);
+            Assert.IsFalse(result);
         }
     }
 }
