@@ -16,7 +16,7 @@ namespace UnitTestProject1
         [TestInitialize]
         public void BeginTest()
         {
-            _p = new Person("Magne");
+            _p = new Person("010190-1235", "Magne");
         }
 
         [TestMethod]
@@ -36,6 +36,17 @@ namespace UnitTestProject1
             _p.Age = (decimal)18.01;
             result = _p.isAdult();
             Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestEquality()
+        {
+            Person otherP = new Person("010190-1235", "Magne");
+            otherP.Age = 24;
+            _p.Age = 24;
+
+            //Assert.AreEqual(_p, otherP);
+            //Assert.IsTrue(_p == otherP);
         }
     }
 }
