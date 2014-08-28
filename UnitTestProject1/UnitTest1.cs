@@ -38,15 +38,39 @@ namespace UnitTestProject1
             Assert.IsTrue(result);
         }
 
-        [TestMethod]
-        public void TestEquality()
-        {
-            Person otherP = new Person("010190-1235", "Magne");
-            otherP.Age = 24;
-            _p.Age = 24;
 
-            //Assert.AreEqual(_p, otherP);
-            //Assert.IsTrue(_p == otherP);
+
+
+
+        [TestMethod]
+        public void TestInEquality()
+        {
+            Person p = new Person();
+            p.Name = "Bjarne";
+            p.SSN = "010190-1235";
+            p.Age = 24;
+
+            Person otherP = new Person("010190-1235", "Børge");
+            otherP.Age = 24;
+
+            Assert.AreNotEqual(p, otherP);
+        }
+
+
+        [TestMethod]
+        public void TestEqual()
+        {
+            Person p = new Person();
+            p.Name = "Bjarne";
+            p.SSN = "010190-1235";
+            p.Age = 24;
+
+            Person otherP = new Person();
+            otherP.Name = "Bjarne";
+            otherP.SSN = "010190-1235";
+            otherP.Age = 24;
+
+            Assert.AreEqual(p, otherP);
         }
     }
 }
