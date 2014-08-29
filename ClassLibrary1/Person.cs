@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    public class Person 
+    public class Person : IEquatable<Person>
     {
         private string _name;
         private decimal _age;
@@ -25,7 +25,17 @@ namespace ClassLibrary1
         public decimal Age
         {
             get { return _age; }
-            set { _age = value; }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new AgeException();
+                }
+
+                _age = value;
+            }
+
+    
         }
 
         public string SSN
@@ -35,7 +45,10 @@ namespace ClassLibrary1
         }
 
         public Person()
-        {}
+        {
+            _name = "bjarne";
+            _age = 234;
+        }
 
         public Person(string ssn, string name)
         {
@@ -54,22 +67,42 @@ namespace ClassLibrary1
         }
 
 
+        public bool Equals(Person other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return string.Equals(_name, other._name) && _age == other._age && string.Equals(_ssn, other._ssn);
+        }
+
         public override bool Equals(object obj)
         {
-           
-
-            Person other = (Person) obj;
-
-            if (this.Name != other.Name)
-            {
-                return false;
-            }
-            if (this.Age != other.Age)
-            {
-                return false;
-            }
-
-            return true;
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Person) obj);
         }
-    } 
-}
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = (_name != null ? _name.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ _age.GetHashCode();
+                hashCode = (hashCode*397) ^ (_ssn != null ? _ssn.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
+
+        public static bool operator ==(Person left, Person right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(Person left, Person right)
+        {
+            return !Equals(left, right);
+        }
+
+
+    }  // end of class
+} // end of namespace 

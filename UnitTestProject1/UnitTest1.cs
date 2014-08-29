@@ -72,5 +72,31 @@ namespace UnitTestProject1
 
             Assert.AreEqual(p, otherP);
         }
+
+        [TestMethod]
+        public void TestAgeException()
+        {
+            Person p = new Person();
+            p.Name = "Bjarne";
+            p.SSN = "010190-1235";
+
+            p.Age = -35;
+
+            try
+            {
+                p.Age = -24;
+                Assert.Fail();
+            }
+            catch (AgeException ae)
+            {
+                Assert.AreEqual("Alder for lav", ae.Message);
+            }
+            catch (Exception e)
+            {
+               Assert.Fail();
+            }
+
+
+        }
     }
 }
